@@ -2,13 +2,13 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME = 'yourdockerhubusername/node-docker-ci'
+        IMAGE_NAME = 'rohanvasista/node-docker-ci'
     }
 
     stages {
         stage('Clone Repository') {
             steps {
-                git 'https://github.com/yourusername/node-docker-ci.git'
+                git 'https://github.com/Rohanvasista/node-docker-ci.git'
             }
         }
 
@@ -22,7 +22,7 @@ pipeline {
 
         stage('Push to Docker Hub') {
             steps {
-                withDockerRegistry([credentialsId: 'docker-hub-creds', url: '']) {
+                withDockerRegistry([credentialsId: 'docker-hub-creds', url: 'https://hub.docker.com/repositories/rohanvasista']) {
                     script {
                         docker.image("${IMAGE_NAME}").push("latest")
                     }
